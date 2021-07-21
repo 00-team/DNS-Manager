@@ -2,9 +2,9 @@
   "name": "dns-manager",
   "version": "1.0.0",
   "description": "windows dns manager with nodejs electron and react",
-  "main": "index.js",
+  "main": "./src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/00-team/DNS-Manager/issues"
   },
-  "homepage": "https://github.com/00-team/DNS-Manager#readme"
+  "homepage": "https://github.com/00-team/DNS-Manager#readme",
+  "devDependencies": {
+    "electron": "^13.1.7"
+  }
 }
