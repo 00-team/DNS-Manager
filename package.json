@@ -2,7 +2,7 @@
   "name": "dns-manager",
   "version": "1.0.0",
   "description": "windows dns manager with nodejs electron and react",
-  "main": "./src/electron-main.js",
+  "main": "./src/electron/main.js",
   "scripts": {
     "electron": "electron .",
     "react": "webpack --mode development --watch ./src/App.js -o ./static/build/",

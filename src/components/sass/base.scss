@@ -1,9 +1,33 @@
+
+// Google fonts
+@import url(https://fonts.googleapis.com/css2?family=Graduate&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+    display: none;
 }
 
 body {
     background-color: #000;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+}
+
+.content-container {
+    height: calc(100vh - 20px);
+    overflow-y: auto;
+    overflow-x: hidden;
 }

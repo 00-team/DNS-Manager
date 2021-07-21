@@ -2,15 +2,19 @@ import React from 'react'
 import ReactDOM from 'react-dom';
 
 import Header from './components/layouts/Header'
+import SavedDNS from './components/layouts/SavedDNS'
 
 import './components/sass/base.scss'
 
 const App = () => {
     return (
-        <div style={{ fontFamily: 'sans-serif', color: '#FFF' }}>
+        <>
             <Header />
-            xx
-        </div>
+            
+            <div className='content-container'>
+                <SavedDNS />
+            </div>
+        </>
     )
 }
 

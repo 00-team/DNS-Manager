@@ -1,0 +1,19 @@
+.saved-dns {
+    width: 200px;
+    height: calc(100vh + 20px);
+    border-right: 2px solid red;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 10px;
+
+    .dns {
+        color: #FFF;
+        border-radius: 20px;
+        border: 2px solid lightblue;
+        padding: 5px 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 10px 0;
+    }
+}
