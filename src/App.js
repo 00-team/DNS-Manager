@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom';
 
 import Header from './components/layouts/Header'
 import NetAdapter from './components/layouts/NetAdapter'
+import DnsChanger from './components/dns-changer/DnsChanger';
 
+// alerts
+import { Provider as AlertProvider } from 'react-alert'
+import AlertsTemp from './components/layouts/AlertsTemp';
 
 // redux
-import { Provider as ReduxProvider, useDispatch, useSelector } from 'react-redux';
+import { Provider as ReduxProvider } from 'react-redux';
 import store from './redux/store';
-// import { getUser } from './actions/account/account';
+
 
 // style
 import './components/sass/base.scss'
@@ -19,7 +23,7 @@ const alertOptions = {
     timeout: 7000,
     transition: 'fade',
     containerStyle: {
-        top: window.innerWidth < 1000 ? '10px' : '70px',
+        top: '20px',
         zIndex: '100',
     }
 }
@@ -32,6 +36,7 @@ const App = () => {
             
             <div className='content-container'>
                 <NetAdapter />
+                <DnsChanger />
             </div>
         </>
     )
@@ -42,7 +47,9 @@ export default App
 
 ReactDOM.render(
     <ReduxProvider store={store}>
-        <App />
+        <AlertProvider template={AlertsTemp} {...alertOptions} >
+            <App />
+        </AlertProvider>
     </ReduxProvider>, 
     document.getElementById('root')
 )
