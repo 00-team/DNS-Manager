@@ -1,10 +1,14 @@
 import {
     SELECTED_ADAPTER,
+    LOADED_ADAPTERS,
+    LOADING_ADAPTERS,
 } from '../../actions/adapter/types';
 
 
 const initialState = {
-    adapterId: null,
+    selectedAdapterId: null,
+    adapters: null,
+    loading: false,
 };
 
 export default function (state = initialState, action) {
@@ -12,7 +16,17 @@ export default function (state = initialState, action) {
         case SELECTED_ADAPTER:
             return {
                 ...state,
-                adapterId: action.payload,
+                selectedAdapterId: action.payload,
+            };
+        case LOADED_ADAPTERS:
+            return {
+                ...state,
+                adapters: action.payload,
+            };
+        case LOADING_ADAPTERS:
+            return {
+                ...state,
+                loading: action.payload,
             };
         default:
             return state;
