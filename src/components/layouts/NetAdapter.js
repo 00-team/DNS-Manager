@@ -1,47 +1,31 @@
 import React, { useEffect, useState } from 'react'
-
-import { exec } from 'child_process'
+import { useSelector, useDispatch } from 'react-redux'
 
 import PacmanLoader from 'react-spinners/PacmanLoader';
 import { css } from '@emotion/react';
 
+import { loadAdapters } from '../../redux/actions/adapter/adapters';
+
 import './sass/net-adapter.scss'
+
 
 const NetAdapter = () => {
     const [adapters, setAdapters] = useState([])
+    const stateAdapters = useSelector(state => state.adapters)
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        exec('powershell "Get-NetAdapter | ConvertTo-Json -Compress"', (error, stdout, stderr) => {
-            if (error) {
-                console.log('Error! ', error);
-                return;
-            }
-        
-            const NetAdaptersData = JSON.parse(stdout);
-            if (typeof NetAdaptersData === 'object') {
-                setAdapters(NetAdaptersData.map((item, index) => {
-                    return {
-                        id: index,
-                        adapterId: item.InterfaceIndex,
-                        adapterName: item.Name,
-                        selected: false,
-                        status: item.Status,
-                    }
-                }))
-            }
-        })
+        if (typeof stateAdapters.adapters === 'object' && stateAdapters.adapters !== null) {
+            setAdapters(stateAdapters.adapters)
+        }
+    }, [stateAdapters])
 
-    }, [])
+    useEffect(() => {
+        dispatch(loadAdapters())
+    }, [dispatch])
 
-    const ChaneSelected = (id) => {
-        setAdapters(adapters.map(item => {
-            item.selected = false
-            if (item.id === id) {
-                item.selected = true
-            }
-
-            return item
-        }))
+    const ChaneSelected = (adapter_id) => {
+        dispatch({ type: 'SELECTED_ADAPTER', payload: adapter_id })
     }
 
     const LoadingFlag = <div className='loading-box' style={{ height: '88vh', width: '60%' }} >
@@ -49,14 +33,17 @@ const NetAdapter = () => {
     </div>
 
     const AdaptersFlag = adapters.map(item => 
-        <div key={item.id} className={'adapter' + (item.selected ? ' selected' : '')} onClick={() => ChaneSelected(item.id)}>
+        <div key={item.id} className={'adapter' + (item.adapterId === stateAdapters.selectedAdapterId ? ' selected' : '')} 
+            onClick={() => ChaneSelected(item.adapterId)}
+        >
             <span className='name' id='name'>{item.adapterName}</span>
         </div>
     )
 
     return (
         <div className='net-adapters'>
-            {adapters.length > 0 ? AdaptersFlag : LoadingFlag}
+            {stateAdapters.loading && LoadingFlag}
+            {stateAdapters.adapters && (stateAdapters.adapters.length > 0 && AdaptersFlag)}
         </div>
     )
 }
