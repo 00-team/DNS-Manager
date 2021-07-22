@@ -1,0 +1,1 @@
+export const SELECTED_ADAPTER = 'SELECTED_ADAPTER';
