@@ -5,6 +5,7 @@
   "main": "./src/electron/main.js",
   "scripts": {
     "electron": "electron .",
+    "rebuild": "electron-rebuild -f -w sqlite3",
     "react": "webpack --mode development --watch ./src/App.js -o ./static/build/",
     "build": "webpack --mode production ./src/App.js -o ./static/build/"
   },
@@ -29,6 +30,7 @@
     "electron": "^13.1.7",
     "electron-builder": "^22.11.7",
     "electron-devtools-installer": "^3.2.0",
+    "electron-rebuild": "^2.3.5",
     "sass": "^1.35.2",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
@@ -38,11 +40,17 @@
   "dependencies": {
     "@emotion/babel-plugin": "^11.3.0",
     "electron-is-dev": "^2.0.0",
+    "knex": "^0.95.7",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-alert": "^7.0.3",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
-    "react-transition-group": "^4.4.2"
+    "react-redux": "^7.2.4",
+    "react-spinners": "^0.11.0",
+    "react-transition-group": "^4.4.2",
+    "redux": "^4.1.0",
+    "redux-thunk": "^2.3.0",
+    "sqlite3": "^5.0.2"
   }
 }
