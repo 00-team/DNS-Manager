@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+
 module.exports = {
     module: {
         rules: [
@@ -19,4 +21,11 @@ module.exports = {
         sourceMapFilename: "[name].js.map"
     },
     devtool: "source-map",
+
+    plugins: [
+        new webpack.ExternalsPlugin('commonjs', [
+            'electron',
+            'child_process'
+        ])
+    ]
 };

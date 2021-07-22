@@ -1,15 +1,17 @@
 import React from 'react'
 import { VscClose } from 'react-icons/vsc'
 
-const win = window.require('electron').remote.getCurrentWindow();
+import { ipcRenderer } from 'electron'
+
 
 import './sass/header.scss'
 
 const Header = () => {
 
     const CloseWindow = () => {
-        win.removeAllListeners();
-        win.close()
+        ipcRenderer.invoke('close-window').then(result => {
+            console.log(result);
+        })
     }
 
     return (

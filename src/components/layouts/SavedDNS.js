@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-
-const { exec } = window.require('child_process')
-
+import { exec } from 'child_process'
 
 import './sass/saved-dns.scss'
 
