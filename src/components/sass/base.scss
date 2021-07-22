@@ -21,6 +21,9 @@
 }
 
 body {
+    width: 1000px;
+    min-width: 1000px;
+    max-width: 1000px;
     background-color: #000;
     overflow: hidden;
     font-family: 'Roboto', sans-serif;
@@ -30,6 +33,7 @@ body {
     height: calc(100vh - 20px);
     overflow-y: auto;
     overflow-x: hidden;
+    display: flex;
 
     .loading-box {
         width: 100%;
