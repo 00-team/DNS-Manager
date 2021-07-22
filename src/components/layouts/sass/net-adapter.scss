@@ -1,0 +1,25 @@
+.net-adapters {
+    width: 200px;
+    height: calc(100vh - 20px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    .adapter {
+        color: #FFF;
+        background-color: #222;
+        padding: 5px 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #FFF1;
+        }
+
+        &.selected {
+            background-color: #010101;
+            position: relative;
+        }
+    }
+}
