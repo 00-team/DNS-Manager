@@ -1,0 +1,20 @@
+.custom-button {
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'Graduate', 'Roboto', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin: 0 10px;
+    border: 2px solid #222;
+    background-color: transparent;
+    color: #FFF;
+    border-radius: 5px;
+
+    &:hover {
+        border-color: #555;
+    }
+
+    &:active {
+        background-color: #555;
+    }
+}
