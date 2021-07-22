@@ -1,0 +1,30 @@
+.dns-changer-container {
+    width: 600px;
+    height: calc(100vh - 20px);
+
+    .dns-changer {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        align-items: center;
+        color: #FFF;
+
+        .dns {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            margin-bottom: 20px;
+
+            .input-container {
+                width: 300px;
+                margin-left: 30px;
+                margin-top: 10px;
+            }
+
+            span {
+                font-family: 'Graduate', 'Roboto', sans-serif;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
