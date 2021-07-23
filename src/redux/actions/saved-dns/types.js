@@ -1,0 +1,2 @@
+export const LOAD_SAVED_DNS = 'LOAD_SAVED_DNS'
+export const LOADING_SAVED_DNS = 'LOADING_SAVED_DNS'
