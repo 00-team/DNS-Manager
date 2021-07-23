@@ -13,21 +13,45 @@ import { loadDns } from '../../redux/actions/dns/get-dns'
 import { resetDns } from '../../redux/actions/dns/reset-dns'
 import { changeDns } from '../../redux/actions/dns/change-dns'
 
+import { SaveSavedDns } from '../../redux/actions/saved-dns/save-saved-dns'
+
 import './sass/dns-changer.scss'
 
 // 178.22.122.100
 // 185.51.200.2
 
+const GetDnsName = ({ dnsServers, setShowGetDnsName }) => {
+    const dispatch = useDispatch();
+    const [dnsName, setdnsName] = useState('')
+
+    const CloseGDN = () => {
+        setdnsName('');
+        setShowGetDnsName(false);
+    }
+
+    return (
+        <div className='get-dns-name-container'>
+            <div className='get-dns-name'>
+                <Input placeholder='Enter dns name' onChange={value => setdnsName(value)} />
+                <div className='actions'>
+                    <Button onClick={() => CloseGDN()}>Close</Button>
+                    <Button onClick={() => {dispatch(SaveSavedDns(dnsName, dnsServers.dns1, dnsServers.dns2));CloseGDN();}}>Save</Button>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 const DnsChanger = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
 
     const [dnsServers, setDnsServers] = useState({ dns1 : '' , dns2 : ''})
+    const [showGetDnsName, setShowGetDnsName] = useState(false)
     const adapters = useSelector(state => state.adapters)
     const adapterDns = useSelector(state => state.adapterDns)
     const alerts = useSelector((state) => state.alerts);
-
+    
 
     useEffect(() => {
         if (alerts.info) {alert.info(alerts.info); dispatch({ type: 'INFO_ALERT', payload: null });}
@@ -51,7 +75,6 @@ const DnsChanger = () => {
         <PacmanLoader color='#FFF' loading={true} css={css`width:auto;height:auto;`} />
     </div>
 
-
     const DnsChangerFlag = 
     <div className="dns-changer">
         <div className='dns'>
@@ -63,7 +86,9 @@ const DnsChanger = () => {
             <Input type='ipv4' onChange={ip => setDnsServers({...dnsServers, dns2: ip})} defaultValue={dnsServers.dns2} />
         </div>
         <div className='actions'>
-            <Button onClick={() => console.log(dnsServers)}> Save DNS </Button>
+            <Button onClick={() => {
+                setShowGetDnsName(true)
+            }}> Save DNS </Button>
 
             <Button onClick={() => {
                 if (adapterDns.adapterId) {
@@ -83,6 +108,8 @@ const DnsChanger = () => {
     return (
         <div className='dns-changer-container'>
             {adapterDns.loading ? LoadingFlag : (adapterDns.adapterId ? DnsChangerFlag : <></>)}
+
+            {showGetDnsName && <GetDnsName dnsServers={dnsServers} setShowGetDnsName={setShowGetDnsName} />}
         </div>
     )
 }
