@@ -7,7 +7,10 @@
     "electron": "electron .",
     "rebuild": "electron-rebuild -f -w sqlite3",
     "react": "webpack --mode development --watch ./src/App.js -o ./static/build/",
-    "build": "webpack --mode production ./src/App.js -o ./static/build/"
+    "build": "webpack --mode production ./src/App.js -o ./static/build/",
+
+    "postinstall": "electron-builder install-app-deps",
+    "electron-build": "electron-builder build --win"
   },
   "repository": {
     "type": "git",
