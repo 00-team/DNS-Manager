@@ -25,7 +25,8 @@ module.exports = {
     plugins: [
         new webpack.ExternalsPlugin('commonjs', [
             'electron',
-            'child_process'
+            'child_process',
+            'sqlite3',
         ])
     ]
 };
