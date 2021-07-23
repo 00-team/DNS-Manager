@@ -14,6 +14,12 @@ import {
 
 
 export const changeDns = (adapterId, dns1, dns2) => (dispatch) => {
+    const IPv4Regex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+
+    if (!IPv4Regex.test(dns1) || !IPv4Regex.test(dns2)) {
+        return dispatch({ type: ERROR_ALERT, payload: 'Error, Your Dns is not valid' })
+    }
+
     dispatch({ type: LOADING_DNS, payload: true })
 
     exec(`powershell Set-DnsClientServerAddress -InterfaceIndex ${adapterId} -ServerAddresses ('${dns1}','${dns2}')`, (error, stdout, stderr) => {
