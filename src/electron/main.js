@@ -60,10 +60,12 @@ ipcMain.handle('close-window', async (event, args) => {
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('db.sqlite3');
 
-db.serialize(function() {
-    db.run("CREATE TABLE if not exists saved_dns (name text, preferred_dns text, alternate_dns text)");
-
-    // db.run("INSERT INTO saved_dns VALUES ('DNS 1', '178.22.122.100', '185.51.200.2')")
-});
-
+db.run("CREATE TABLE if not exists saved_dns (id integer, name text, preferred_dns text, alternate_dns text)");
 db.close();
+
+// db.serialize(function() {
+//     db.run("CREATE TABLE if not exists saved_dns (id integer, name text, preferred_dns text, alternate_dns text)");
+
+//     // db.run("INSERT INTO saved_dns VALUES ('DNS 1', '178.22.122.100', '185.51.200.2')")
+// });
+
