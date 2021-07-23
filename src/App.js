@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Header from './components/layouts/Header'
 import NetAdapter from './components/layouts/NetAdapter'
 import DnsChanger from './components/dns-changer/DnsChanger';
+import SavedDns from './components/saved-dns/SavedDns';
 
 // alerts
 import { Provider as AlertProvider } from 'react-alert'
@@ -37,6 +38,7 @@ const App = () => {
             <div className='content-container'>
                 <NetAdapter />
                 <DnsChanger />
+                <SavedDns />
             </div>
         </>
     )
