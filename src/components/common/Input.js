@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import './sass/input.scss'
 
-const Input = ({ type, defaultValue, onChange }) => {
+const Input = ({ type, defaultValue, placeholder, onChange }) => {
     // 178.202.122.100
     const [inputStatus, setInputStatus] = useState('normal')
     const [isInputFocus, setIsInputFocus] = useState(false)
@@ -41,13 +41,20 @@ const Input = ({ type, defaultValue, onChange }) => {
     if (type === 'ipv4') return IpInput
 
     return (
-        <></>
+        <div className='input-container'>
+            <input type='text' className='input' placeholder={placeholder} 
+                defaultValue={defaultValue}
+                maxLength='30' onChange={e => onChange(e.target.value)} 
+            />
+            <span className='focus-border' ></span>
+        </div>
     )
 }
 
 Input.defaultProps = {
     type: '',
     defaultValue: '',
+    placeholder: '',
     onChange: () => {},
 }
 
