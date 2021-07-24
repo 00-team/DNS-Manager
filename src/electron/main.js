@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, globalShortcut } = require('electron')
 
 let mainWindow;
 
@@ -14,13 +14,14 @@ function createWindow () {
 
         maximizable: false,
 
-        icon: './static/img/00.ico',
+        icon: './build/icon/app.ico',
         frame: false,
         
         backgroundColor: '#FFF',
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
+            devTools: false,
         },
     })
     
@@ -33,6 +34,8 @@ function createWindow () {
 
 app.whenReady().then(() => {
     createWindow()
+
+    globalShortcut.registerAll(['ctrl+R','ctrl+W','ctrl+shift+R', 'ctrl+shift+=', 'F11'], () => {})
     
     app.on('activate', function () {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
@@ -40,6 +43,8 @@ app.whenReady().then(() => {
 })
 
 app.on('window-all-closed', function () {
+    globalShortcut.unregisterAll()
+
     if (process.platform !== 'darwin') app.quit()
 })
 
@@ -62,10 +67,3 @@ const db = new sqlite3.Database('db.sqlite3');
 
 db.run("CREATE TABLE if not exists saved_dns (id integer, name text, preferred_dns text, alternate_dns text)");
 db.close();
-
-// db.serialize(function() {
-//     db.run("CREATE TABLE if not exists saved_dns (id integer, name text, preferred_dns text, alternate_dns text)");
-
-//     // db.run("INSERT INTO saved_dns VALUES ('DNS 1', '178.22.122.100', '185.51.200.2')")
-// });
-
