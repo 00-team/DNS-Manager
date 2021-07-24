@@ -42,4 +42,15 @@ body {
         justify-content: center;
         align-items: center;
     }
+
+    .discord-00-team {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        background-color: #000;
+        border-top-left-radius: 7px;
+    }
 }
