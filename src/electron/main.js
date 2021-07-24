@@ -1,5 +1,7 @@
 const { app, BrowserWindow, ipcMain, globalShortcut } = require('electron')
 
+const debug = true;
+
 let mainWindow;
 
 function createWindow () {
@@ -21,7 +23,7 @@ function createWindow () {
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
-            devTools: false,
+            devTools: debug,
         },
     })
     
@@ -35,7 +37,7 @@ function createWindow () {
 app.whenReady().then(() => {
     createWindow()
 
-    globalShortcut.registerAll(['ctrl+R','ctrl+W','ctrl+shift+R', 'ctrl+shift+=', 'F11'], () => {})
+    if (!debug) globalShortcut.registerAll(['ctrl+R','ctrl+W','ctrl+shift+R', 'ctrl+shift+=', 'F11'], () => {})
     
     app.on('activate', function () {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
