@@ -17,10 +17,10 @@ export const loadDns = (adapterId) => (dispatch) => {
 
     exec(`powershell "Get-DnsClientServerAddress -InterfaceIndex ${adapterId} -AddressFamily IPv4 | ConvertTo-Json -Compress"`, (error, stdout, stderr) => {
         if (error) {
-            console.log(error, stderr);
+            dispatch({ type: LOADING_DNS, payload: false })
             return dispatch({
                 type: ERROR_ALERT,
-                payload: error.message
+                payload: 'Error to Load Dns for thid adapter'
             })
         }
     

@@ -18,6 +18,7 @@ export const loadAdapters = () => (dispatch) => {
 
     exec('powershell "Get-NetAdapter | ConvertTo-Json -Compress"', (error, stdout, stderr) => {
         if (error) {
+            dispatch({ type: LOADING_ADAPTERS, payload: false })
             return dispatch({
                 type: ERROR_ALERT,
                 payload: 'Error to Get Adapters ...'
@@ -35,7 +36,7 @@ export const loadAdapters = () => (dispatch) => {
                 }
             })
 
-            payload = payload.filter(item => item.status !== 'Not Present')
+            payload = payload.filter(item => item.status !== 'Not Present' && item.status !== 'Disabled')
             
             dispatch({ type: LOADED_ADAPTERS, payload: payload })
 
