@@ -1,7 +1,7 @@
 {
   "name": "dns-manager",
   "version": "1.0.0",
-  "description": "windows dns manager with nodejs electron and react",
+  "description": "DNS Manager. Created By 00 Team",
   "main": "./src/electron/main.js",
   "scripts": {
     "electron": "electron .",
@@ -12,17 +12,31 @@
     "postinstall": "electron-builder install-app-deps",
     "electron-build": "electron-builder build --win"
   },
+  "build": {
+    "appId": "com.00-team.dns-manager",
+    "copyright": "Copyright © 2021 00 Team",
+    "files": ["**/*", "build/icon.*"],
+    "icon": "build/icon/app.ico",
+    "productName": "DNS Manager",
+    "nsis": {
+      "oneClick": false,
+      "installerIcon": "build/icon/installer.ico",
+      "runAfterFinish": false,
+      "shortcutName": "DNS Manager - 00 Team",
+      "allowToChangeInstallationDirectory": true
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/00-team/DNS-Manager.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "00 Team",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/00-team/DNS-Manager/issues"
   },
-  "homepage": "https://github.com/00-team/DNS-Manager#readme",
+  "homepage": "https://discord.gg/nux2MBcjPD",
   "devDependencies": {
     "@babel/core": "^7.14.8",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
