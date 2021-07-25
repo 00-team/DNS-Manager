@@ -18,7 +18,7 @@ const Header = () => {
         <div className='titlebar-container'>
             <header className='titlebar'>
                 <div className="drag-region">
-                    <span className='title'>Dns Manager - Beta</span>
+                    <span className='title'>Dns Manager</span>
                     <div className="controls">
                         <div className='btn close' id='close-window' onClick={() => CloseWindow()}>
                             <VscClose />

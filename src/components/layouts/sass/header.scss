@@ -23,13 +23,8 @@
 
             .title {
                 font-size: 15px;
-                -webkit-app-region: no-drag;
                 transition: color 200ms;
                 text-transform: uppercase;
-
-                &:hover {
-                    color: #EEE;
-                }
             }
 
             .controls {
