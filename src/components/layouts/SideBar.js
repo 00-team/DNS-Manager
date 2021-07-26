@@ -19,12 +19,12 @@ const SideBar = () => {
     return (
         <div className='sidebar-container'>
             <div className='sidebar'>
-                <div className='top-level'>
+                <div>
                     <Action Icon={<FiServer />} onClick={() => ChangePage('dns-changer')} PageName='dns-changer' />
                     <Action Icon={<FiDatabase />} onClick={() => ChangePage('dns-database')} PageName='dns-database' />
                 </div>
 
-                <div className="bottom-level">
+                <div>
                     <Action Icon={<TeamIcon />} onClick={() => ChangePage('about')} PageName='about' />
                     <Action Icon={<FiSettings />} onClick={() => ChangePage('settings')} PageName='settings' />
                 </div>
