@@ -1,19 +1,15 @@
-import { SHOW_ABOUT, CHANGE_PAGE } from "./types"
+import { CHANGE_PAGE } from "./types"
+
+const allowPages = ['dns-changer', 'dns-database', 'settings', 'about']
 
 const initState = {
-    isAboutShow: false,
     page: 'dns-changer', // dns-changer, dns-database, settings
 }
 
 export default function (state = initState, action) {
     switch (action.type) {
-        case SHOW_ABOUT:
-            return {
-                ...state,
-                isAboutShow: Boolean(action.payload)
-            }
         case CHANGE_PAGE:
-            if (['dns-changer', 'dns-database', 'settings'].includes(action.payload)) {
+            if (allowPages.includes(action.payload)) {
                 return {
                     ...state,
                     page: action.payload
