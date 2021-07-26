@@ -51,16 +51,25 @@ app.on('window-all-closed', function () {
 })
 
 
-ipcMain.handle('close-window', async (event, args) => {
+ipcMain.handle('window-control', async (event, type) => {
     try {
-        mainWindow.removeAllListeners()
-        mainWindow.close()
-
-        return {'success': 'successfully closed window'}
+        switch (type) {
+            case 'close':
+                mainWindow.removeAllListeners()
+                mainWindow.close()
+                return {status: 'success', 'message': 'successfully closed window'}
+            
+            case 'minimize':
+                mainWindow.minimize()
+                return {status: 'success', 'message': 'successfully minimized window'}
+    
+            default:
+                return {status: 'not found', 'message': 'your command is not registerd'}
+        }
     } catch (error) {
-        return {'error': error.message}
+        return {status: 'error', message: 'oops something went wrong! pls report to support'}
     }
-})
+}) 
 
 
 // db
