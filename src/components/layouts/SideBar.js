@@ -25,7 +25,7 @@ const SideBar = () => {
                 </div>
 
                 <div>
-                    <Action Icon={<TeamIcon />} onClick={() => ChangePage('about')} PageName='about' />
+                    {/* <Action Icon={<TeamIcon />} onClick={() => ChangePage('about')} PageName='about' /> */}
                     <Action Icon={<FiSettings />} onClick={() => ChangePage('settings')} PageName='settings' />
                 </div>
             </div>
@@ -39,6 +39,7 @@ const Action = ({ Icon, onClick, PageName }) => {
     return (
         <div className={'action' + (currentPage === PageName ? ' selected' : '') } 
             onClick={onClick} 
+            title={PageName}
         >
             {Icon}
         </div>

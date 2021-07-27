@@ -1,0 +1,35 @@
+.tabs-container {
+    height: 30px;
+    background-color: #101010;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    .tabs {
+        .tab-container {
+            height: 30px;
+            background-color: #0007;
+            display: inline-block;
+            border-right: 1px solid #111;
+            border-top: 1px solid transparent;
+            cursor: pointer;
+            color: #AAA;
+
+            &:hover {
+                background-color: #000D;
+            }
+
+            &.selected {
+                background-color: #000;
+                border-top: 1px solid #FFF;
+                color: #FFF;
+            }
+
+            .tab {
+                display: flex;
+                align-items: center;
+                height: 100%;
+                padding: 0 20px;
+            }
+        }
+    }
+}

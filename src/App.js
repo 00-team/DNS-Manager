@@ -18,6 +18,9 @@ import store from './redux/store';
 import './components/sass/base.scss'
 
 
+// Editor
+import Editor from './components/editor/Editor';
+
 // OpenDNS: 208.67.222.222 and 208.67.220.220;
 // Cloudflare 1.1.1.1 and 1.0.0.1;
 // Google: 8.8.8.8 and 8.8.4.4;
@@ -41,7 +44,7 @@ const App = () => {
             <SideBar />
             
             <div className='content-container'>
-                optimizing-code
+                <Editor />
             </div>
         </>
     )
