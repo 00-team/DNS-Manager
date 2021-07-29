@@ -3,39 +3,30 @@ import React from 'react'
 // style
 import './sass/tabs.scss'
 
-const TabList = [
-    {
-        id: 1,
-        tabName: 'Tab 1',
-        isSelected: false
-    },
-    {
-        id: 2,
-        tabName: 'Tab 2',
-        isSelected: true
-    },
-    {
-        id: 3,
-        tabName: 'Tab 3',
-        isSelected: false
-    },
-]
 
-const Tabs = () => {
+const Tabs = ({ TabList, SetCurrentTab }) => {
+    const EmptyTabs = <div className='empty-tabs'> There is no Tab to show </div>
+    const TabsList = TabList.map((tab, tabIndex) => 
+        <Tab 
+            key={tabIndex} 
+            isSelected={tab.isSelected} 
+            onClick={() => SetCurrentTab(tab.id)} 
+            TabName={tab.tabName} 
+        />
+    )
+
     return (
         <div className='tabs-container'>
             <div className='tabs'>
-                {TabList.map((tab, tabIndex) => 
-                    <Tab 
-                        key={tabIndex} 
-                        isSelected={tab.isSelected} 
-                        onClick={() => console.log(tab.id)} 
-                        TabName={tab.tabName} 
-                    />
-                )}
+                {TabList.length < 1 ? EmptyTabs : TabsList}
             </div>
         </div>
     )
+}
+
+Tabs.defaultProps = {
+    TabList: [],
+    SetCurrentTab: () => {},
 }
 
 const Tab = ({ isSelected, onClick, TabName }) => {
