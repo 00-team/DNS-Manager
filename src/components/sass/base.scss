@@ -31,8 +31,7 @@ body {
 
 .content-container {
     height: calc(100vh - 20px);
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     display: flex;
     color: #FFF;
     margin-left: 40px;
