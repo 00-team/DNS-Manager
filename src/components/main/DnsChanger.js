@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // redux
 import { useSelector, useDispatch } from 'react-redux'
@@ -10,6 +10,7 @@ import { LOAD_DNS_CHANGER } from '../../redux/reducers/dns-changer/types'
 import Editor from '../editor/Editor'
 import Tabs from '../editor/Tabs'
 
+import DnsInput from '../common/DnsInput'
 
 // style
 import './sass/dns-changer.scss'
@@ -46,9 +47,34 @@ export default DnsChanger
 
 
 const DnsEditor = () => {
+    const state = useSelector(state => state.DnsChanger.tabs)
+    const [currentTab, setCurrentTab] = useState(null)
+    const [currentDNS, setCurrentDNS] = useState({dns1: '', dns2: ''})
+
+    useEffect(() => {
+        if (state.find(item => item.isSelected)) {
+            setCurrentTab(state.find(item => item.isSelected))
+        }
+    }, [state])
+
+    useEffect(() => {
+        if (currentTab) setCurrentDNS({dns1: currentTab.dns1, dns2: currentTab.dns2})
+    }, [currentTab])
+
+    
+    if (!currentTab) return <></>
+    
     return (
         <div className='dns-editor'>
+            <div className='dns'>
+                <span>DNS 1</span>
+                <DnsInput customStyle={{ margin: '10px 0 0 20px' }} defaultValue={currentDNS.dns1} />
+            </div>
 
+            <div className='dns'>
+                <span>DNS 2</span>
+                <DnsInput customStyle={{ margin: '10px 0 0 20px' }} defaultValue={currentDNS.dns2} />
+            </div>
         </div>
     )
 }
