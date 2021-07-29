@@ -10,7 +10,9 @@ import { LOAD_DNS_CHANGER } from '../../redux/reducers/dns-changer/types'
 import Editor from '../editor/Editor'
 import Tabs from '../editor/Tabs'
 
+// common elements
 import DnsInput from '../common/DnsInput'
+import Button from '../common/Button'
 
 // style
 import './sass/dns-changer.scss'
@@ -34,9 +36,8 @@ const DnsChanger = () => {
         <div className='dns-changer'>
             <Editor>
                 <Tabs TabList={state.tabs} SetCurrentTab={TabChanger} />
-                {/* <span>{state.tabs.find(item => item.isSelected).tabName}</span> */}
                 <div className='editor-content'>
-                    <DnsEditor />
+                    <DnsEditor currentTab={state.tabs.find(item => item.isSelected) || null} />
                 </div>
             </Editor>
         </div>
@@ -46,39 +47,42 @@ const DnsChanger = () => {
 export default DnsChanger
 
 
-const DnsEditor = () => {
-    const state = useSelector(state => state.DnsChanger.tabs)
-    const [currentTab, setCurrentTab] = useState(null)
+const DnsEditor = ({ currentTab }) => {
     const [currentDNS, setCurrentDNS] = useState({dns1: '', dns2: ''})
-
-    useEffect(() => {
-        if (state.find(item => item.isSelected)) {
-            setCurrentTab(state.find(item => item.isSelected))
-        }
-    }, [state])
+    const [initDNS, setInitDNS] = useState({dns1: '', dns2: ''})
 
     useEffect(() => {
         if (currentTab) setCurrentDNS({dns1: currentTab.dns1, dns2: currentTab.dns2})
+        if (currentTab) setInitDNS({dns1: currentTab.dns1, dns2: currentTab.dns2})
     }, [currentTab])
 
-    
     if (!currentTab) return <></>
     
     return (
         <div className='dns-editor'>
             <div className='dns'>
                 <span>DNS 1</span>
-                <DnsInput customStyle={{ margin: '10px 0 0 20px' }} defaultValue={currentDNS.dns1} />
+                <DnsInput 
+                    customStyle={{ margin: '10px 0 0 20px' }} 
+                    defaultValue={initDNS.dns1} 
+                    onChange={value => setCurrentDNS({...currentDNS, dns1: value})} 
+                />
             </div>
 
             <div className='dns'>
                 <span>DNS 2</span>
-                <DnsInput customStyle={{ margin: '10px 0 0 20px' }} defaultValue={currentDNS.dns2} />
+                <DnsInput 
+                    customStyle={{ margin: '10px 0 0 20px' }} 
+                    defaultValue={initDNS.dns2} 
+                    onChange={value => setCurrentDNS({...currentDNS, dns2: value})} 
+                />
+            </div>
+
+            <div className='actions'>
+                <Button onClick={e => console.log(currentDNS)}>Change DNS</Button>
+                <Button>Reset DNS</Button>
+                <Button>Save DNS</Button>
             </div>
         </div>
     )
-}
-
-DnsEditor.defaultProps = {
-
 }

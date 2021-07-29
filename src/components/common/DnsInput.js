@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 
 // style
@@ -8,7 +8,16 @@ const IPv4Regex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]
 
 const DnsInput = ({ onChange, placeholder, defaultValue, customStyle }) => {
     const [style, setStyle] = useState({})
+    const inputRef = useRef(null)
 
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.value = defaultValue
+            setStyle({...style, borderColor: ''})
+            inputRef.current.style.borderColor =  ''
+        }
+    }, [defaultValue, inputRef])
+    
     useEffect(() => {
         setStyle({...style, ...customStyle})
     }, [customStyle])
@@ -39,6 +48,7 @@ const DnsInput = ({ onChange, placeholder, defaultValue, customStyle }) => {
     return (
         <div className='dns-input-container'>
             <input 
+                ref={inputRef}
                 style={style}
                 type="text" 
                 className='dns-input'
@@ -54,7 +64,7 @@ DnsInput.defaultProps = {
     onChange: () => {},
     placeholder: 'Enter DNS',
     defaultValue: '',
-    customStyle: {}
+    customStyle: {},
 }
 
 DnsInput.propTypes = {

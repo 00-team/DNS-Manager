@@ -12,5 +12,12 @@
             width: 300px;
             margin-bottom: 30px;
         }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            margin-left: 20px;
+        }
     }
 }
