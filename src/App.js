@@ -17,6 +17,8 @@ import store from './redux/store';
 // style
 import './components/sass/base.scss'
 
+// Main Control section
+import MainContent from './components/main/MainContent';
 
 // Editor
 import Editor from './components/editor/Editor';
@@ -44,7 +46,7 @@ const App = () => {
             <SideBar />
             
             <div className='content-container'>
-                <Editor />
+                <MainContent />
             </div>
         </>
     )
