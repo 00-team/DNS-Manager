@@ -20,26 +20,24 @@ const SideBar = () => {
         <div className='sidebar-container'>
             <div className='sidebar'>
                 <div>
-                    <Action Icon={<FiServer />} onClick={() => ChangePage('dns-changer')} PageName='dns-changer' />
-                    <Action Icon={<FiDatabase />} onClick={() => ChangePage('dns-database')} PageName='dns-database' />
+                    <Action Icon={<FiServer />} onClick={() => ChangePage('dns-changer')} PageName='dns-changer' title='DNS Changer' />
+                    <Action Icon={<FiDatabase />} onClick={() => ChangePage('dns-database')} PageName='dns-database' title='DNS Database' />
                 </div>
 
                 <div>
-                    {/* <Action Icon={<TeamIcon />} onClick={() => ChangePage('about')} PageName='about' /> */}
-                    <Action Icon={<FiSettings />} onClick={() => ChangePage('settings')} PageName='settings' />
+                    <Action Icon={<FiSettings />} onClick={() => ChangePage('settings')} PageName='settings' title='Settings' />
                 </div>
             </div>
         </div>
     )
 }
 
-const Action = ({ Icon, onClick, PageName }) => {
+const Action = ({ Icon, onClick, PageName, title }) => {
     const currentPage = useSelector(state => state.sidebar.page)
-
     return (
         <div className={'action' + (currentPage === PageName ? ' selected' : '') } 
             onClick={onClick} 
-            title={PageName}
+            title={title}
         >
             {Icon}
         </div>
@@ -47,9 +45,10 @@ const Action = ({ Icon, onClick, PageName }) => {
 }
 
 Action.defaultProps = {
-    Icon: TeamIcon,
+    Icon: null,
     onClick: () => {},
     PageName: '',
+    title: '',
 }
 
 export default SideBar
