@@ -59,30 +59,58 @@ const DnsEditor = ({ currentTab }) => {
     if (!currentTab) return <></>
     
     return (
-        <div className='dns-editor'>
-            <div className='dns'>
-                <span>DNS 1</span>
-                <DnsInput 
-                    customStyle={{ margin: '10px 0 0 20px' }} 
-                    defaultValue={initDNS.dns1} 
-                    onChange={value => setCurrentDNS({...currentDNS, dns1: value})} 
-                />
+        <div className='dns-editor-container'>
+            <div className='dns-editor'>
+                <div className='dns'>
+                    <span>DNS 1</span>
+                    <DnsInput 
+                        customStyle={{ margin: '10px 0 0 20px' }} 
+                        defaultValue={initDNS.dns1} 
+                        onChange={value => setCurrentDNS({...currentDNS, dns1: value})} 
+                    />
+                </div>
+
+                <div className='dns'>
+                    <span>DNS 2</span>
+                    <DnsInput 
+                        customStyle={{ margin: '10px 0 0 20px' }} 
+                        defaultValue={initDNS.dns2} 
+                        onChange={value => setCurrentDNS({...currentDNS, dns2: value})} 
+                    />
+                </div>
+
+                <div className='actions'>
+                    <Button onClick={e => console.log(currentDNS)}>Change DNS</Button>
+                    <Button>Reset DNS</Button>
+                    <Button>Save DNS</Button>
+                </div>
             </div>
 
-            <div className='dns'>
-                <span>DNS 2</span>
-                <DnsInput 
-                    customStyle={{ margin: '10px 0 0 20px' }} 
-                    defaultValue={initDNS.dns2} 
-                    onChange={value => setCurrentDNS({...currentDNS, dns2: value})} 
-                />
-            </div>
+            <DnsDatabaseSide />
+        </div>
+    )
+}
 
-            <div className='actions'>
-                <Button onClick={e => console.log(currentDNS)}>Change DNS</Button>
-                <Button>Reset DNS</Button>
-                <Button>Save DNS</Button>
-            </div>
+const DnsDatabaseSide = () => {
+    const ddatabase = [
+        { dnsName: 'dns', dns1: 'x.x.x.x', dns2: '7.7.7.7' },
+        { dnsName: 'dns sssssssssssssssssssssssssssssssssssssssssss  ssssssssssssssssssss', dns1: 'x.x.x.x', dns2: '7.7.7.7' },
+        { dnsName: 'Google', dns1: 'x.x.x.x', dns2: '7.7.7.7' },
+        { dnsName: 'Google', dns1: 'x.x.x.x', dns2: '7.7.7.7' },
+        { dnsName: 'Google', dns1: 'x.x.x.x', dns2: '7.7.7.7' },
+        { dnsName: 'Google', dns1: 'x.x.x.x', dns2: '7.7.7.7' },
+        
+    ]
+
+    return (
+        <div className='dns-database-side'>
+            <ul className='dns-list'>
+                {ddatabase.map((item, index) => 
+                    <li key={index} className='dns' onClick={() => console.log(item)} >
+                        <span>{item.dnsName}</span>
+                    </li>
+                )}
+            </ul>
         </div>
     )
 }

@@ -3,21 +3,53 @@
     height: 100%;
     background-color: #000;
     
-    .dns-editor {
-        width: 70%;
+    
+    .dns-editor-container {
+        width: 100%;
         height: 100%;
-        padding: 20px;
+        display: flex;
 
-        .dns {
-            width: 300px;
-            margin-bottom: 30px;
+        .dns-editor {
+            width: 70%;
+            height: 100%;
+            padding: 20px;
+            .dns {
+                width: 300px;
+                margin-bottom: 30px;
+            }
+    
+            .actions {
+                display: flex;
+                flex-direction: column;
+                width: 300px;
+                margin-left: 20px;
+            }
         }
 
-        .actions {
-            display: flex;
-            flex-direction: column;
-            width: 300px;
-            margin-left: 20px;
+        .dns-database-side {
+            width: 30%;
+            height: 100%;
+
+            .dns-list {
+                padding: 10px;
+                height: 100%;
+                overflow-y: auto;
+
+                .dns {
+                    border: 2px solid #00DC7D;
+                    padding: 10px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    border-radius: 7px;
+                    margin-bottom: 10px;
+                    cursor: pointer;
+
+                    &:hover {
+                        border-color: #1EC9E8;
+                    }
+                }
+            }
         }
     }
 }
