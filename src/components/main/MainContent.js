@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 
 // Pages
 import DnsChanger from './DnsChanger'
+import DnsDatabase from './DnsDatabase'
 
 const MainContent = () => {
     const currentPage = useSelector(state => state.sidebar.page)
@@ -13,7 +14,7 @@ const MainContent = () => {
         case 'dns-changer':
             return <DnsChanger />
         case 'dns-database':
-            return <span>dns database</span>
+            return <DnsDatabase />
         case 'settings':
             return <span>settings</span>
 
