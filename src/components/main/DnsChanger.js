@@ -92,20 +92,12 @@ const DnsEditor = ({ currentTab }) => {
 }
 
 const DnsDatabaseSide = () => {
-    const ddatabase = [
-        { dnsName: 'dns', dns1: 'x.x.x.x', dns2: '7.7.7.7' },
-        { dnsName: 'dns sssssssssssssssssssssssssssssssssssssssssss  ssssssssssssssssssss', dns1: 'x.x.x.x', dns2: '7.7.7.7' },
-        { dnsName: 'Google', dns1: 'x.x.x.x', dns2: '7.7.7.7' },
-        { dnsName: 'Google', dns1: 'x.x.x.x', dns2: '7.7.7.7' },
-        { dnsName: 'Google', dns1: 'x.x.x.x', dns2: '7.7.7.7' },
-        { dnsName: 'Google', dns1: 'x.x.x.x', dns2: '7.7.7.7' },
-        
-    ]
+    const state = useSelector(state => state.DnsDatabase)
 
     return (
         <div className='dns-database-side'>
             <ul className='dns-list'>
-                {ddatabase.map((item, index) => 
+                {state.dnsList.map((item, index) => 
                     <li key={index} className='dns' onClick={() => console.log(item)} >
                         <span>{item.dnsName}</span>
                     </li>
