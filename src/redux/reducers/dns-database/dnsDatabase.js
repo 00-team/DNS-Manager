@@ -5,9 +5,9 @@ import {
 
 const initState = {
     dnsList: [
-        { dnsName: 'Google', dns1: '8.8.8.8', dns2: '8.4.4.8' },
-        { dnsName: 'Cloudflare', dns1: '8.8.8.8', dns2: '8.4.4.8' },
-        { dnsName: 'Random', dns1: '7.7.7.7', dns2: '7.6.6.7' },
+        { id: 1, dnsName: 'Google', dns1: '8.8.8.8', dns2: '8.4.4.8' },
+        { id: 2, dnsName: 'Cloudflare', dns1: '8.8.8.8', dns2: '8.4.4.8' },
+        { id: 3, dnsName: 'Random', dns1: '7.7.7.7', dns2: '7.6.6.7' },
     ],
     loading: false
 }
