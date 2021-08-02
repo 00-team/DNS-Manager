@@ -20,9 +20,6 @@ import './components/sass/base.scss'
 // Main Control section
 import MainContent from './components/main/MainContent';
 
-// Editor
-import Editor from './components/editor/Editor';
-
 // OpenDNS: 208.67.222.222 and 208.67.220.220;
 // Cloudflare 1.1.1.1 and 1.0.0.1;
 // Google: 8.8.8.8 and 8.8.4.4;
