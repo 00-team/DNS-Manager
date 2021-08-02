@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 // redux
 import { useSelector, useDispatch } from 'react-redux'
+import { loadTabs } from '../../redux/actions/dns-changer/dnsChanger'
 
 // dns changer redux
 import { LOAD_DNS_CHANGER } from '../../redux/reducers/dns-changer/types'
@@ -14,12 +15,17 @@ import DnsEditor from '../editor/DnsEditor'
 // loader
 import Loader from '../common/Loader'
 
+// alerts
+import { useAlert } from 'react-alert'
+
 // style
 import './sass/dns-changer.scss'
 
 const DnsChanger = () => {
     const dispatch = useDispatch()
+    const alert = useAlert()
     const state = useSelector(state => state.DnsChanger)
+    const alerts = useSelector(state => state.alerts)
     const [currentTab, setCurrentTab] = useState(null)
 
     const TabChanger = (tabId) => {
@@ -28,6 +34,18 @@ const DnsChanger = () => {
             payload: state.tabs.map(item => item.id === tabId ? {...item, isSelected: true} : {...item, isSelected: false})
         })
     }
+
+    useEffect(() => {
+        if (alerts.info) alert.info(alerts.info);
+        if (alerts.success) alert.success(alerts.success);
+        if (alerts.error) alert.error(alerts.error);
+    }, [alerts])
+
+
+    useEffect(() => {
+        dispatch(loadTabs())
+    }, [dispatch])
+
 
     useEffect(() => {
         if (state.tabs.find(item => item.isSelected)) setCurrentTab(state.tabs.find(item => item.isSelected))
