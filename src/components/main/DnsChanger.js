@@ -60,50 +60,6 @@ const DnsChanger = () => {
 export default DnsChanger
 
 
-// const DnsEditor = ({ currentTab }) => {
-//     const [currentDNS, setCurrentDNS] = useState({dns1: '', dns2: ''})
-//     const [initDNS, setInitDNS] = useState({dns1: '', dns2: ''})
-
-//     useEffect(() => {
-//         if (currentTab) setCurrentDNS({dns1: currentTab.dns1, dns2: currentTab.dns2})
-//         if (currentTab) setInitDNS({dns1: currentTab.dns1, dns2: currentTab.dns2})
-//     }, [currentTab])
-
-//     if (!currentTab) return <></>
-    
-//     return (
-//         <div className='dns-editor-container'>
-//             <div className='dns-editor'>
-//                 <div className='dns'>
-//                     <span>DNS 1</span>
-//                     <DnsInput 
-//                         customStyle={{ margin: '10px 0 0 20px' }} 
-//                         defaultValue={initDNS.dns1} 
-//                         onChange={value => setCurrentDNS({...currentDNS, dns1: value})} 
-//                     />
-//                 </div>
-
-//                 <div className='dns'>
-//                     <span>DNS 2</span>
-//                     <DnsInput 
-//                         customStyle={{ margin: '10px 0 0 20px' }} 
-//                         defaultValue={initDNS.dns2} 
-//                         onChange={value => setCurrentDNS({...currentDNS, dns2: value})} 
-//                     />
-//                 </div>
-
-//                 <div className='actions'>
-//                     <Button onClick={e => console.log(currentDNS)}>Change DNS</Button>
-//                     <Button>Reset DNS</Button>
-//                     <Button>Save DNS</Button>
-//                 </div>
-//             </div>
-
-//             <DnsDatabaseSide />
-//         </div>
-//     )
-// }
-
 const DnsDatabaseSide = ({ SetCurrentTab, currentTab }) => {
     const state = useSelector(state => state.DnsDatabase)
 
