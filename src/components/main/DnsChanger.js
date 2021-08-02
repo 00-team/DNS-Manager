@@ -11,9 +11,8 @@ import Editor from '../editor/Editor'
 import Tabs from '../editor/Tabs'
 import DnsEditor from '../editor/DnsEditor'
 
-// common elements
-import DnsInput from '../common/DnsInput'
-import Button from '../common/Button'
+// loader
+import Loader from '../common/Loader'
 
 // style
 import './sass/dns-changer.scss'
@@ -34,6 +33,8 @@ const DnsChanger = () => {
         if (state.tabs.find(item => item.isSelected)) setCurrentTab(state.tabs.find(item => item.isSelected))
     }, [state])
 
+    if (state.loading) return <Loader />
+
     return (
         <div className='dns-changer'>
             <Editor>
@@ -49,7 +50,7 @@ const DnsChanger = () => {
                             { label: 'Save DNS', onClick: d => console.log(d) },
                         ]} 
                     />}
-                    <DnsDatabaseSide />
+                    <DnsDatabaseSide SetCurrentTab={setCurrentTab} currentTab={currentTab} />
                 </div>
             </Editor>
         </div>
@@ -103,14 +104,14 @@ export default DnsChanger
 //     )
 // }
 
-const DnsDatabaseSide = () => {
+const DnsDatabaseSide = ({ SetCurrentTab, currentTab }) => {
     const state = useSelector(state => state.DnsDatabase)
 
     return (
         <div className='dns-database-side'>
             <ul className='dns-list'>
                 {state.dnsList.map((item, index) => 
-                    <li key={index} className='dns' onClick={() => console.log(item)} >
+                    <li key={index} className='dns' onClick={() => SetCurrentTab({...currentTab, dns1: item.dns1, dns2: item.dns2})} >
                         <span>{item.tabName}</span>
                     </li>
                 )}
