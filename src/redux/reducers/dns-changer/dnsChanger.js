@@ -4,30 +4,8 @@ import {
 } from "./types";
 
 const initState = {
-    loading: false,
-    tabs: [
-        {
-            id: 1,
-            tabName: 'Cloudflare DNS',
-            isSelected: true,
-            dns1: '1.1.1.1',
-            dns2: '1.0.0.1'
-        },
-        {
-            id: 2,
-            tabName: 'Google DNS',
-            isSelected: false,
-            dns1: '8.8.8.8',
-            dns2: '8.4.4.8'
-        },
-        {
-            id: 3,
-            tabName: 'None',
-            isSelected: false,
-            dns1: '',
-            dns2: ''
-        },
-    ]
+    loading: true,
+    tabs: []
 }
 
 
