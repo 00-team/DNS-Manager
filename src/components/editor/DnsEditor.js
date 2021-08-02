@@ -12,8 +12,8 @@ const DnsEditor = ({ dns1, dns2, actionList }) => {
     const [initDNS, setInitDNS] = useState({dns1: '', dns2: ''})
 
     useEffect(() => {
-        if (dns1 && dns2) setCurrentDNS({dns1: dns1, dns2: dns2})
-        if (dns1 && dns2) setInitDNS({dns1: dns1, dns2: dns2})
+        setCurrentDNS({dns1: dns1, dns2: dns2})
+        setInitDNS({dns1: dns1, dns2: dns2})
     }, [dns1, dns2])
     
     return (
