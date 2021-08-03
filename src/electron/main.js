@@ -50,6 +50,14 @@ app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') app.quit()
 })
 
+app.on('browser-window-focus', () => {
+    if (!debug) globalShortcut.registerAll(['ctrl+R','ctrl+W','ctrl+shift+R', 'ctrl+shift+=', 'F11'], () => {})
+})
+
+app.on('browser-window-blur', () => {
+    globalShortcut.unregisterAll()
+})
+
 
 ipcMain.handle('window-control', async (event, type) => {
     try {
@@ -76,5 +84,5 @@ ipcMain.handle('window-control', async (event, type) => {
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('db.sqlite3');
 
-db.run("CREATE TABLE if not exists saved_dns (id integer, name text, preferred_dns text, alternate_dns text)");
+db.run("CREATE TABLE if not exists DNS_DATABASE (id integer, name text, dns1 text, dns2 text)");
 db.close();
