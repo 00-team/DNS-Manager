@@ -84,5 +84,5 @@ ipcMain.handle('window-control', async (event, type) => {
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('db.sqlite3');
 
-db.run("CREATE TABLE if not exists DNS_DATABASE (id integer, name text, dns1 text, dns2 text)");
+db.run("CREATE TABLE if not exists DNS_DATABASE (id integer, dns_name text, dns1 text, dns2 text)");
 db.close();
