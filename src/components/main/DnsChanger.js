@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 // redux
 import { useSelector, useDispatch } from 'react-redux'
 import { loadTabs } from '../../redux/actions/dns-changer/dnsChanger'
+import { AddDnsDatabase } from '../../redux/actions/dns-database/dnsDatabase'
 
 // dns changer redux
 import { LOAD_DNS_CHANGER } from '../../redux/reducers/dns-changer/types'
@@ -28,6 +29,10 @@ const DnsChanger = () => {
     const alerts = useSelector(state => state.alerts)
     const [currentTab, setCurrentTab] = useState(null)
 
+    useEffect(() => {
+        dispatch(loadTabs())
+    }, [dispatch])
+
     const TabChanger = (tabId) => {
         dispatch({ 
             type: LOAD_DNS_CHANGER,
@@ -42,9 +47,9 @@ const DnsChanger = () => {
     }, [alerts])
 
 
-    useEffect(() => {
-        dispatch(loadTabs())
-    }, [dispatch])
+    const AddDns = (data) => {
+        dispatch(AddDnsDatabase({ dnsName: 'No Name', dns1: data.dns1, dns2: data.dns2 }))
+    }
 
 
     useEffect(() => {
@@ -65,7 +70,7 @@ const DnsChanger = () => {
                         actionList={[
                             { label: 'Change DNS', onClick: d => console.log(d) },
                             { label: 'Reset DNS', onClick: d => console.log(d) },
-                            { label: 'Save DNS', onClick: d => console.log(d) },
+                            { label: 'Save DNS', onClick: d => AddDns(d) },
                         ]} 
                     />}
                     <DnsDatabaseSide SetCurrentTab={setCurrentTab} currentTab={currentTab} />
