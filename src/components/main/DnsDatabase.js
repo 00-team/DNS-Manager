@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 // redux
 import { useDispatch, useSelector } from 'react-redux'
 import { LOAD_DNS_DATABASE } from '../../redux/reducers/dns-database/types'
-import { LoadDatabase } from '../../redux/actions/dns-database/dnsDatabase'
+import { LoadDatabase, UpdateDataBase } from '../../redux/actions/dns-database/dnsDatabase'
 
 // editor
 import Editor from '../editor/Editor'
@@ -23,6 +23,7 @@ const DnsDatabase = () => {
     const dispatch = useDispatch()
     const state = useSelector(state => state.DnsDatabase)
     const [currentTab, setCurrentTab] = useState(null)
+    const [dnsName, setDnsName] = useState(null)
 
     useEffect(() => {
         dispatch(LoadDatabase())
@@ -52,7 +53,7 @@ const DnsDatabase = () => {
                         <div className='dns'>
                             <span>DNS Name</span>
                             <Input 
-                                onChange={v => console.log(v)} 
+                                onChange={value => setDnsName(value)} 
                                 customStyle={{ margin: '10px 0 0 20px' }} 
                                 defaultValue={currentTab.tabName}
                                 placeholder='Enter Dns Name'
@@ -62,7 +63,12 @@ const DnsDatabase = () => {
                         dns1={currentTab.dns1} 
                         dns2={currentTab.dns2}
                         actionList={[
-                            { label: 'Save', onClick: data => console.log(data) },
+                            { label: 'Save', onClick: data => dispatch(UpdateDataBase({ 
+                                id: currentTab.id, 
+                                dnsName: dnsName, 
+                                dns1: data.dns1,
+                                dns2: data.dns2,
+                            })) },
                             { label: 'Delete', onClick: data => console.log(data) },
                         ]}
                     />}

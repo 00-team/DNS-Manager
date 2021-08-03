@@ -67,3 +67,26 @@ export const AddDnsDatabase = (data) => (dispatch) => {
         }
     })
 }
+
+export const UpdateDataBase = (data) => (dispatch) => {
+    Loading(dispatch)
+
+    data = {
+        ...data,
+        dnsName: data.dnsName || 'No Name',
+        dns1: data.dns1 || '0.0.0.0',
+        dns2: data.dns2 || '0.0.0.0',
+    }
+
+    const db = new sqlite.Database('db.sqlite3')
+
+    db.serialize(() => {
+        db.run(CreateTable)
+        
+        db.run(`UPDATE DNS_DATABASE SET dns_name = '${data.dnsName}', dns1 = '${data.dns1}', dns2 = '${data.dns2}' WHERE id = ${data.id}`, (err) => {
+            if (err) SendError(dispatch, err.message)
+        })
+
+        db.close(() => dispatch(LoadDatabase()))
+    })
+}
