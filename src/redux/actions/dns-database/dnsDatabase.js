@@ -90,3 +90,19 @@ export const UpdateDataBase = (data) => (dispatch) => {
         db.close(() => dispatch(LoadDatabase()))
     })
 }
+
+export const DeleteDns = (id) => (dispatch) => {
+    Loading(dispatch)
+
+    const db = new sqlite.Database('db.sqlite3')
+
+    db.serialize(() => {
+        db.run(CreateTable)
+        
+        db.run(`DELETE FROM DNS_DATABASE WHERE id = ${id}`, (err) => {
+            if (err) SendError(dispatch, err.message)
+        })
+
+        db.close(() => dispatch(LoadDatabase()))
+    })
+}

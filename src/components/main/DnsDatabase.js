@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 // redux
 import { useDispatch, useSelector } from 'react-redux'
 import { LOAD_DNS_DATABASE } from '../../redux/reducers/dns-database/types'
-import { LoadDatabase, UpdateDataBase } from '../../redux/actions/dns-database/dnsDatabase'
+import { LoadDatabase, UpdateDataBase, DeleteDns } from '../../redux/actions/dns-database/dnsDatabase'
 
 // editor
 import Editor from '../editor/Editor'
@@ -38,6 +38,7 @@ const DnsDatabase = () => {
 
     useEffect(() => {
         if (state.dnsList) if (state.dnsList.find(item => item.isSelected)) setCurrentTab(state.dnsList.find(item => item.isSelected))
+        if (state.dnsList) if (state.dnsList.length < 1) setCurrentTab(null)
     }, [state])
 
     if (state.loading) return <Loader />
@@ -69,7 +70,7 @@ const DnsDatabase = () => {
                                 dns1: data.dns1,
                                 dns2: data.dns2,
                             })) },
-                            { label: 'Delete', onClick: data => console.log(data) },
+                            { label: 'Delete', onClick: data => dispatch(DeleteDns(currentTab.id)) },
                         ]}
                     />}
                 </div>
