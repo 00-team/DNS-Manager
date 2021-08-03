@@ -7,7 +7,7 @@ import DnsInput from '../common/DnsInput'
 // style
 import './sass/dns-editor.scss'
 
-const DnsEditor = ({ dns1, dns2, actionList }) => {
+const DnsEditor = ({ dns1, dns2, actionList, UpLayer }) => {
     const [currentDNS, setCurrentDNS] = useState({dns1: '', dns2: ''})
     const [initDNS, setInitDNS] = useState({dns1: '', dns2: ''})
 
@@ -18,6 +18,7 @@ const DnsEditor = ({ dns1, dns2, actionList }) => {
     
     return (
         <div className='dns-editor'>
+            {UpLayer}
             <div className='dns'>
                 <span>DNS 1</span>
                 <DnsInput 
@@ -48,6 +49,7 @@ DnsEditor.defaultProps = {
     dns2: '',
     actionList: [],
     customStyle: {},
+    UpLayer: null,
 }
 
 export default DnsEditor
