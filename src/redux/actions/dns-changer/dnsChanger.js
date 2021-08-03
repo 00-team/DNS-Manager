@@ -5,22 +5,25 @@ import {
     LOAD_DNS_CHANGER
 } from '../../reducers/dns-changer/types';
 
+
 import {
     SUCCESS_ALERT,
     ERROR_ALERT,
     INFO_ALERT,
 } from '../../reducers/base/types'
 
+
 export const loadTabs = () => (dispatch) => {
-    dispatch({ type: LOADING_DNS_CHANGER, payload: true })
+
+    const SendError = (msg='Error ...') => dispatch({ type: ERROR_ALERT, payload: msg })
+    const Loading = (isLoading=true) => dispatch({ type: LOADING_DNS_CHANGER, payload: isLoading })
+
+    Loading()
 
     exec('powershell "Get-NetAdapter | ConvertTo-Json -Compress"', (error, stdout, stderr) => {
         if (error) {
-            dispatch({ type: LOADING_DNS_CHANGER, payload: false })
-            return dispatch({
-                type: ERROR_ALERT,
-                payload: 'Error to Get Adapters ...'
-            })
+            Loading(false)
+            return SendError('Error to Load Adapters')
         }
 
         try {
@@ -33,18 +36,33 @@ export const loadTabs = () => (dispatch) => {
                     id: item.InterfaceIndex,
                     tabName: item.Name,
                     isSelected: index === 0 ? true : false,
-                    dns1: 'x',
-                    dns2: 'x'
+                    dns1: '',
+                    dns2: ''
                 }
                 index += 1
 
                 const LoadDnsData = (error, stdout, stderr) => {
-                    const DnsData = JSON.parse(stdout);
-                    tab.dns1 = DnsData.Address[0] || ''
-                    tab.dns2 = DnsData.Address[1] || ''
+                    if (error) {
+                        finalSend()
+                        return SendError('Error to load dns\'s')
+                    }
 
-                    // dispatch({ type: LOAD_DNS_CHANGER, payload: payload })
-                    cb()
+                    const DnsData = JSON.parse(stdout);
+                    try {
+                        if (DnsData.Address && typeof DnsData.Address === 'object') {
+                            if (DnsData.Address.length === 2) {
+                                tab.dns1 = DnsData.Address[0]
+                                tab.dns2 = DnsData.Address[1]
+                            }
+                        }
+                    } catch (error) {
+                        dispatch({
+                            type: ERROR_ALERT,
+                            payload: 'Error to Dns data'
+                        })
+                    }
+
+                    finalSend()
                 }
 
                 exec(`powershell "Get-DnsClientServerAddress -InterfaceIndex ${item.InterfaceIndex} -AddressFamily IPv4 | ConvertTo-Json -Compress"`, LoadDnsData)
@@ -53,18 +71,12 @@ export const loadTabs = () => (dispatch) => {
 
             }).filter(item => item !== null)
 
-            const cb = () => {
-                dispatch({ type: LOAD_DNS_CHANGER, payload: payload }) 
-            }
+            const finalSend = () => dispatch({ type: LOAD_DNS_CHANGER, payload: payload })
 
-            // dispatch({ type: LOAD_DNS_CHANGER, payload: payload })
         } catch (error) {
-            dispatch({
-                type: ERROR_ALERT,
-                payload: 'Error to Load Data'
-            })
+            SendError('Error to Load Data')
         }
 
-        dispatch({ type: LOADING_DNS_CHANGER, payload: false })
+        Loading(false)
     })
 }
