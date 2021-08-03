@@ -3,20 +3,27 @@ import React, { useState, useEffect } from 'react'
 // redux
 import { useDispatch, useSelector } from 'react-redux'
 import { LOAD_DNS_DATABASE } from '../../redux/reducers/dns-database/types'
+import { LoadDatabase } from '../../redux/actions/dns-database/dnsDatabase'
 
 // editor
 import Editor from '../editor/Editor'
 import Tabs from '../editor/Tabs'
 import DnsEditor from '../editor/DnsEditor'
 
-// style
+// loader
+import Loader from '../common/Loader'
 
+// style
 import './sass/dns-database.scss'
 
 const DnsDatabase = () => {
     const dispatch = useDispatch()
     const state = useSelector(state => state.DnsDatabase)
     const [currentTab, setCurrentTab] = useState(null)
+
+    useEffect(() => {
+        dispatch(LoadDatabase())
+    }, [dispatch])
 
     const TabChanger = (tabId) => {
         dispatch({ 
@@ -28,6 +35,8 @@ const DnsDatabase = () => {
     useEffect(() => {
         if (state.dnsList) if (state.dnsList.find(item => item.isSelected)) setCurrentTab(state.dnsList.find(item => item.isSelected))
     }, [state])
+
+    if (state.loading) return <Loader />
 
     return (
         <div className='dns-database'>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom';
 
 // layouts
@@ -10,8 +10,9 @@ import { Provider as AlertProvider } from 'react-alert'
 import AlertsTemp from './components/layouts/AlertsTemp';
 
 // redux
-import { Provider as ReduxProvider } from 'react-redux';
+import { Provider as ReduxProvider, useDispatch } from 'react-redux';
 import store from './redux/store';
+import { LoadDatabase } from './redux/actions/dns-database/dnsDatabase';
 
 
 // style
@@ -37,6 +38,12 @@ const alertOptions = {
 
 
 const App = () => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(LoadDatabase())
+    }, [dispatch])
+
     return (
         <>
             <Header />
