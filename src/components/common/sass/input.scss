@@ -1,0 +1,17 @@
+.input-container {
+    width: 100%;
+    position: relative;
+
+    .input {
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        color: #FFF;
+        background-color: transparent;
+        width: 100%;
+        letter-spacing: 1px;
+        border: none;
+        padding: 10px 0;
+        border-bottom: 1px solid #FFF6;
+        transition: border-color 300ms;
+    }
+}
