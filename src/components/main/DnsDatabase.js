@@ -13,6 +13,9 @@ import DnsEditor from '../editor/DnsEditor'
 // loader
 import Loader from '../common/Loader'
 
+// common
+import Input from '../common/Input'
+
 // style
 import './sass/dns-database.scss'
 
@@ -45,6 +48,17 @@ const DnsDatabase = () => {
                 <div className='editor-content'>
                     {currentTab && 
                     <DnsEditor 
+                        UpLayer={
+                        <div className='dns'>
+                            <span>DNS Name</span>
+                            <Input 
+                                onChange={v => console.log(v)} 
+                                customStyle={{ margin: '10px 0 0 20px' }} 
+                                defaultValue={currentTab.tabName}
+                                placeholder='Enter Dns Name'
+                            />
+                        </div>
+                        }
                         dns1={currentTab.dns1} 
                         dns2={currentTab.dns2}
                         actionList={[
