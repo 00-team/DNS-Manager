@@ -55,6 +55,7 @@ const DnsInput = ({ onChange, placeholder, defaultValue, customStyle }) => {
                 placeholder={placeholder} 
                 onChange={e => CheckIpAddr(e.target.value)}
                 defaultValue={defaultValue}
+                maxLength='15'
             />
         </div>
     )

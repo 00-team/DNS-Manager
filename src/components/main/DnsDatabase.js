@@ -58,6 +58,7 @@ const DnsDatabase = () => {
                                 customStyle={{ margin: '10px 0 0 20px' }} 
                                 defaultValue={currentTab.tabName}
                                 placeholder='Enter Dns Name'
+                                maxLength='50'
                             />
                         </div>
                         }

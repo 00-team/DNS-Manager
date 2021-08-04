@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react'
 // style
 import './sass/input.scss'
 
-const Input = ({ onChange, placeholder, defaultValue, customStyle }) => {
+const Input = ({ onChange, placeholder, defaultValue, customStyle, maxLength }) => {
     const inputRef = useRef(null)
 
     useEffect(() => {
@@ -22,6 +22,7 @@ const Input = ({ onChange, placeholder, defaultValue, customStyle }) => {
                 placeholder={placeholder} 
                 onChange={e => onChange(e.target.value)}
                 defaultValue={defaultValue}
+                maxLength={maxLength}
             />
         </div>
     )
@@ -32,6 +33,7 @@ Input.defaultProps = {
     placeholder: '',
     defaultValue: '',
     customStyle: {},
+    maxLength: null
 }
 
 export default Input
