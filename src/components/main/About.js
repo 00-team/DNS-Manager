@@ -30,7 +30,9 @@ const About = () => {
                     00 Team has several achievements on Fivem Scripts development and has worked mostly on Web Development.<br />
                     Our work is for example writing HUD, Score Board Menus, and so on.<br />
                     our customers were many popular Fivem Iranian servers like: "Phonixe rp","moonlight rp", "justice city",...<br />
-                    You Can Also Learn More About Us <span className="link" onClick={e => shell.openExternal('https://00-team.github.io/')}>Here</span>
+                    You Can See All Of Our Repositories <span className="link" onClick={e => shell.openExternal('https://github.com/orgs/00-team/repositories')}>Here</span> <br /> <br />
+                    Despite Of That, You Can Check Out Our Website, We Have All Of Our Projects Organized There For You. <br />
+                    See Our Website <span className="link" onClick={e => shell.openExternal('https://00-team.github.io/')}>Here</span>
                 </p>
             </div>
         </div>
