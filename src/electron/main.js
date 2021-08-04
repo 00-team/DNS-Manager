@@ -84,5 +84,18 @@ ipcMain.handle('window-control', async (event, type) => {
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('db.sqlite3');
 
-db.run("CREATE TABLE if not exists DNS_DATABASE (id integer, dns_name text, dns1 text, dns2 text)");
-db.close();
+db.serialize(() => {
+    db.run("CREATE TABLE if not exists DNS_DATABASE (id integer, dns_name text, dns1 text, dns2 text)");
+
+    db.all('SELECT * FROM DNS_DATABASE ORDER BY id DESC LIMIT 1', (err, rows) => {
+        if (rows && typeof rows === 'object') if (rows.length === 0) {
+            db.run("INSERT INTO DNS_DATABASE VALUES (1, 'Google', '8.8.8.8', '8.4.4.8')")
+            db.run("INSERT INTO DNS_DATABASE VALUES (2, 'Cloudflare', '1.1.1.1', '1.0.0.1')")
+            db.run("INSERT INTO DNS_DATABASE VALUES (3, 'Quad9', '9.9.9.9', '149.112.112.112')")
+            db.run("INSERT INTO DNS_DATABASE VALUES (4, 'OpenDNS', '208.67.222.222', '208.67.220.220')")
+
+            db.close();
+        }
+    })
+})
+
