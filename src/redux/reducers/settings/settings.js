@@ -6,12 +6,7 @@ const initState = {
             id: 1,
             tabName: 'Settings',
             isSelected: true
-        },
-        {
-            id: 2,
-            tabName: 'About Us',
-            isSelected: false
-        },
+        }
     ]
 }
 

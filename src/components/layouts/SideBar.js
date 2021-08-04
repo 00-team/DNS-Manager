@@ -25,6 +25,7 @@ const SideBar = () => {
                 </div>
 
                 <div>
+                    <Action Icon={<TeamIcon />} onClick={() => ChangePage('about')} PageName='about' title='About' />
                     <Action Icon={<FiSettings />} onClick={() => ChangePage('settings')} PageName='settings' title='Settings' />
                 </div>
             </div>
