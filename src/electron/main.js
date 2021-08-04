@@ -93,6 +93,7 @@ db.serialize(() => {
             db.run("INSERT INTO DNS_DATABASE VALUES (2, 'Cloudflare', '1.1.1.1', '1.0.0.1')")
             db.run("INSERT INTO DNS_DATABASE VALUES (3, 'Quad9', '9.9.9.9', '149.112.112.112')")
             db.run("INSERT INTO DNS_DATABASE VALUES (4, 'OpenDNS', '208.67.222.222', '208.67.220.220')")
+            db.run("INSERT INTO DNS_DATABASE VALUES (5, 'shecan.ir', '178.22.122.100', '185.51.200.2')")
 
             db.close();
         }
