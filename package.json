@@ -15,7 +15,7 @@
     "copyright": "Copyright © 2021 00 Team",
     "files": [
       "**/*",
-      "build/icon.*"
+      "resources/*"
     ],
     "icon": "resources/app.ico",
     "productName": "DNS Manager",
