@@ -3,7 +3,7 @@ import { CHANGE_PAGE } from "./types"
 const allowPages = ['dns-changer', 'dns-database', 'settings', 'about']
 
 const initState = {
-    page: 'dns-changer',
+    page: 'about',
 }
 
 export default function (state = initState, action) {

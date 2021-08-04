@@ -1,6 +1,7 @@
 .about-us {
     height: 100%;
     width: 100%;
+    position: relative;
     
     .head-container {
         display: flex;
@@ -61,11 +62,25 @@
         }
     }
 
+    .social-media {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+
+        svg {
+            width: 30px;
+            height: 30px;
+            margin: 0 20px;
+            cursor: pointer;
+        }
+    }
+
 
     .link {
-        margin-left: 5px;
         display: inline-block;
-        border-bottom: 3px solid red;
+        border-bottom: 3px solid #51EAFF;
         border-radius: 3px;
 
         &:hover {
