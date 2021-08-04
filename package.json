@@ -8,14 +8,16 @@
     "rebuild": "electron-rebuild -f -w sqlite3",
     "react": "webpack --mode development --watch ./src/App.js -o ./static/build/",
     "build": "webpack --mode production ./src/App.js -o ./static/build/",
-
     "postinstall": "electron-builder install-app-deps",
     "electron-build": "electron-builder build --win"
   },
   "build": {
     "appId": "com.00-team.dns-manager",
     "copyright": "Copyright © 2021 00 Team",
-    "files": ["**/*", "build/icon.*"],
+    "files": [
+      "**/*",
+      "build/icon.*"
+    ],
     "icon": "build/icon/app.ico",
     "productName": "DNS Manager",
     "nsis": {
@@ -56,6 +58,7 @@
   },
   "dependencies": {
     "@emotion/babel-plugin": "^11.3.0",
+    "axios": "^0.21.1",
     "electron-is-dev": "^2.0.0",
     "knex": "^0.95.7",
     "prop-types": "^15.7.2",
