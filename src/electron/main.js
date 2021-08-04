@@ -16,7 +16,7 @@ function createWindow () {
 
         maximizable: false,
 
-        icon: './build/icon/app.ico',
+        icon: './resources/app.ico',
         frame: false,
         
         backgroundColor: '#FFF',

@@ -5,7 +5,6 @@
   "main": "./src/electron/main.js",
   "scripts": {
     "electron": "electron .",
-    "rebuild": "electron-rebuild -f -w sqlite3",
     "react": "webpack --mode development --watch ./src/App.js -o ./static/build/",
     "build": "webpack --mode production ./src/App.js -o ./static/build/",
     "postinstall": "electron-builder install-app-deps",
@@ -18,11 +17,11 @@
       "**/*",
       "build/icon.*"
     ],
-    "icon": "build/icon/app.ico",
+    "icon": "resources/app.ico",
     "productName": "DNS Manager",
     "nsis": {
       "oneClick": false,
-      "installerIcon": "build/icon/installer.ico",
+      "installerIcon": "resources/installer.ico",
       "runAfterFinish": false,
       "shortcutName": "DNS Manager - 00 Team",
       "allowToChangeInstallationDirectory": true
@@ -49,7 +48,6 @@
     "electron": "^13.1.7",
     "electron-builder": "^22.11.7",
     "electron-devtools-installer": "^3.2.0",
-    "electron-rebuild": "^2.3.5",
     "sass": "^1.35.2",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
