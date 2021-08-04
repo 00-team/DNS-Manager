@@ -28,7 +28,7 @@ import MainContent from './components/main/MainContent';
 
 const alertOptions = {
     position: 'top right',
-    timeout: 7000,
+    timeout: 5000,
     transition: 'fade',
     containerStyle: {
         top: '20px',
