@@ -21,122 +21,89 @@
                 margin-top: 100px;
             }
         }
-    }
-}
 
-.about-us{
-    height: 100%;
-    width: 100%;
-    
-    .head-container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-
-        .title-top{
-            display: inline-block;
-            margin: 0 10px;
-        }
-
-        .text-container{
-
-            margin: 5vh 0;
-            // font-family: monospace;
-            font-family: 'Coming Soon', cursive;
-            font-weight: bolder;
-            text-transform: capitalize;
-            font-size: larger;
-        }
-
-        .about-us-title{
-            position: relative;
-            letter-spacing: 18px;
-            font-family: "Graduate", sans-serif;
-            font-size: xxx-large;
-            margin-bottom: 5vh;
-        }
-
-        .line{
-            width: 80px;
-            height: 5px;
-            background-color: aliceblue;
-        }
-
-        .logo-base{
-            margin-top: 3vh;
-            display: grid;
-            font-family: "Graduate", sans-serif;
-            font-size: 10vh;
-
-            .text-logo{
-                text-align: center;
+        .about-us {
+            height: 100%;
+            width: 100%;
+            
+            .head-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+        
+                .title-top {
+                    display: inline-block;
+                    margin: 0 10px;
+                }
+        
+                .text-container {
+        
+                    margin: 5vh 0;
+                    // font-family: monospace;
+                    font-family: 'Coming Soon', cursive;
+                    font-weight: bolder;
+                    text-transform: capitalize;
+                    font-size: larger;
+                }
+        
+                .about-us-title {
+                    position: relative;
+                    letter-spacing: 18px;
+                    font-family: "Graduate", sans-serif;
+                    font-size: xxx-large;
+                    margin-bottom: 5vh;
+                }
+        
+                .line {
+                    margin-top: -20px;
+                    width: 260px;
+                    height: 3px;
+                    background-color: aliceblue;
+                }
+        
+                .logo-base {
+                    margin-top: 5vh;
+                    display: grid;
+                    font-family: "Graduate", sans-serif;
+                    font-size: 10vh;
+        
+                    .text-logo {
+                        text-align: center;
+                        font-size: 66px;
+                    }
+                }
+        
+                // .about-us-sentence{
+                //     font-family: "Graduate", sans-serif;
+                //     font-size: large;
+                //     margin: 2vh 0;
+                // }
+            }
+        
+            .footer-container {
+                margin-top: 5vh;
+                padding: 0 190px;
+        
+                .about-us-text {
+                    // padding: 0 3vh;
+                    word-spacing: 3px;
+                    // text-align: center;
+                    line-height: 25px;
+                }
+            }
+        
+        
+            .link {
+                margin-left: 5px;
+                display: inline-block;
+                border-bottom: 3px solid red;
+                border-radius: 3px;
+        
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
-
-        // .about-us-sentence{
-        //     font-family: "Graduate", sans-serif;
-        //     font-size: large;
-        //     margin: 2vh 0;
-        // }
-    }
-
-    .footer-container{
-        margin-top: 2vh;
-
-        .about-us-text{
-            padding: 0 3vh;
-            word-spacing: 3px;
-            text-align: center;
-        }
-    }
-
-
-    .link{
-        margin-left: 5px;
-        display: inline-block;
-        animation: link 10s infinite ;
-        border-radius: 3px;
-
-        &:hover{
-            cursor: pointer;
-        }
     }
 }
-
-
-
-
-@keyframes link {
-    10%{
-        border-bottom:  3px solid rgb(255, 0, 0);
-    }
-    20%{
-        border-bottom: 3px solid rgb(229, 255, 0);
-    }
-    30%{
-        border-bottom: 3px solid rgb(21, 255, 0);
-    }
-    40%{
-        border-bottom: 3px solid rgb(0, 255, 200);
-    }
-    50%{
-        border-bottom: 3px solid rgb(0, 60, 255);
-    }
-    60%{
-        border-bottom: 3px solid rgb(68, 0, 255);
-    }
-    70%{
-        border-bottom: 3px solid rgb(167, 156, 6);
-    }
-    80%{
-        border-bottom: 3px solid rgb(46, 80, 190);
-    }
-    90%{
-        border-bottom: 3px solid rgb(94, 28, 138);
-    }
-    100%{
-        border-bottom: 3px solid rgb(253, 90, 117);
-    }
-}
-

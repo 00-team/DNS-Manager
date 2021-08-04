@@ -14,6 +14,9 @@ import Tabs from '../editor/Tabs'
 import { useSelector, useDispatch } from 'react-redux'
 import { CHANGE_SETTINGS_TAB } from '../../redux/reducers/settings/types'
 
+// electron
+import { shell } from 'electron';
+
 // style
 import './sass/settings.scss'
 
@@ -61,25 +64,19 @@ const AboutUs = () => {
         <div className='about-us'>
             <div className="head-container">
                 <div className="text-container"><GiPickOfDestiny/> <div className="title-top">We Wrote Our Own Destiny </div>  <GiPickOfDestiny/></div>
-                {/* <div className="about-us-sentence">Bunch Of Creatives Who Love To Code</div> */}
-                <div className="icon"> <TiGroupOutline size={70} /> </div>
-                <div className="about-us-title ">About Us</div>
                 <div className="line"></div>
                 <div className="logo-base">
-                    <span className="text-logo">00</span>
-                    <span className="text-logo">team</span>
+                    <span className="text-logo">00 TEAM</span>
                 </div>
             </div>
             <div className="footer-container">
-                <div className="about-us-text">
-                                                <div> 00 Team is an Iranian, organized company that started its work in 2019.</div>
-                                                <div>00 Team has several achievements on Fivem Scripts development and has worked mostly on Web Development.</div>
-                                                <div> Our work is for example writing HUD, Score Board Menus, and so on.</div>
-                                                <div>our customers were many popular Fivem Iranian servers like: "Phonixe rp","moonlight rp", "justice city",...</div>
-                                                <div>You Can Also Learn More About Us 
-                                                    <div className="link">Here</div>
-                                                </div>
-                </div>
+                <p className='about-us-text'>
+                    00 Team is an Iranian, organized company that started its work in 2019. <br />
+                    00 Team has several achievements on Fivem Scripts development and has worked mostly on Web Development.<br />
+                    Our work is for example writing HUD, Score Board Menus, and so on.<br />
+                    our customers were many popular Fivem Iranian servers like: "Phonixe rp","moonlight rp", "justice city",...<br />
+                    You Can Also Learn More About Us <div className="link" onClick={e => shell.openExternal('https://00-team.github.io/')}>Here</div>
+                </p>
             </div>
         </div>
     )
