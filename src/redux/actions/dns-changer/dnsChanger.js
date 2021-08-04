@@ -1,4 +1,5 @@
 import { exec } from 'child_process'
+import ChechDns from '../../../ChechDns';
 
 import {
     LOADING_DNS_CHANGER,
@@ -13,17 +14,16 @@ import {
 } from '../../reducers/base/types'
 
 
+const SendError = (dispatch, msg='Error ...') => dispatch({ type: ERROR_ALERT, payload: msg })
+const Loading = (dispatch, isLoading=true) => dispatch({ type: LOADING_DNS_CHANGER, payload: isLoading })
+
 export const loadTabs = () => (dispatch) => {
-
-    const SendError = (msg='Error ...') => dispatch({ type: ERROR_ALERT, payload: msg })
-    const Loading = (isLoading=true) => dispatch({ type: LOADING_DNS_CHANGER, payload: isLoading })
-
-    Loading()
+    Loading(dispatch)
 
     exec('powershell "Get-NetAdapter | ConvertTo-Json -Compress"', (error, stdout, stderr) => {
         if (error) {
-            Loading(false)
-            return SendError('Error to Load Adapters')
+            Loading(dispatch, false)
+            return SendError(dispatch, 'Error to Load Adapters')
         }
 
         try {
@@ -44,7 +44,7 @@ export const loadTabs = () => (dispatch) => {
                 const LoadDnsData = (error, stdout, stderr) => {
                     if (error) {
                         finalSend()
-                        return SendError('Error to load dns\'s')
+                        return SendError(dispatch, 'Error to load dns\'s')
                     }
 
                     const DnsData = JSON.parse(stdout);
@@ -56,10 +56,7 @@ export const loadTabs = () => (dispatch) => {
                             }
                         }
                     } catch (error) {
-                        dispatch({
-                            type: ERROR_ALERT,
-                            payload: 'Error to Dns data'
-                        })
+                        SendError(dispatch, 'Error to get Dns Data')
                     }
 
                     finalSend()
@@ -74,9 +71,41 @@ export const loadTabs = () => (dispatch) => {
             const finalSend = () => dispatch({ type: LOAD_DNS_CHANGER, payload: payload })
 
         } catch (error) {
-            SendError('Error to Load Data')
+            SendError(dispatch, 'Error to Load Data')
         }
 
-        Loading(false)
+        Loading(dispatch, false)
     })
+}
+
+export const ChangeDns = (data) => (dispatch) => {
+    Loading(dispatch)
+    
+    switch (data.action) {
+        case 'reset':
+            console.log('r');
+        case 'change':
+            if (ChechDns(data.dns1) && ChechDns(data.dns2)) {
+                exec(`powershell Set-DnsClientServerAddress -InterfaceIndex ${data.id} -ServerAddresses ('${data.dns1}','${data.dns2}')`, (error, stdout, stderr) => {
+                    if (error) {
+                        console.log(error, stderr);
+                        let msg = 'Error To Change Dns'
+            
+                        if (stderr.search('PermissionDenied') !== -1) msg = 'You Shoud run app as admin for Reset or Change DNS'
+                        
+                        Loading(dispatch, false)
+                        return SendError(dispatch, msg)
+                    } else {
+                        dispatch({ type: SUCCESS_ALERT, payload: 'Successfully DNS Changed' })
+                    }
+
+                    dispatch(loadTabs())
+                })
+            } else {
+                Loading(dispatch, false)
+                SendError(dispatch, 'your dns is not valid')
+            }
+        default:
+            break;
+    }
 }

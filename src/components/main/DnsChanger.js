@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react'
 
 // redux
 import { useSelector, useDispatch } from 'react-redux'
-import { loadTabs } from '../../redux/actions/dns-changer/dnsChanger'
+import { LOAD_DNS_CHANGER } from '../../redux/reducers/dns-changer/types'
+import { loadTabs, ChangeDns } from '../../redux/actions/dns-changer/dnsChanger'
 import { AddDnsDatabase } from '../../redux/actions/dns-database/dnsDatabase'
 
-// dns changer redux
-import { LOAD_DNS_CHANGER } from '../../redux/reducers/dns-changer/types'
 
 // Editor
 import Editor from '../editor/Editor'
@@ -41,9 +40,9 @@ const DnsChanger = () => {
     }
 
     useEffect(() => {
-        if (alerts.info) alert.info(alerts.info);
-        if (alerts.success) alert.success(alerts.success);
-        if (alerts.error) alert.error(alerts.error);
+        if (alerts.info) {alert.info(alerts.info); dispatch({ type: 'INFO_ALERT', payload: null });}
+        if (alerts.error) {alert.error(alerts.error); dispatch({ type: 'ERROR_ALERT', payload: null });}
+        if (alerts.success) {alert.success(alerts.success); dispatch({ type: 'SUCCESS_ALERT', payload: null });}
     }, [alerts])
 
 
@@ -68,7 +67,12 @@ const DnsChanger = () => {
                         dns1={currentTab.dns1} 
                         dns2={currentTab.dns2} 
                         actionList={[
-                            { label: 'Change DNS', onClick: d => console.log(d) },
+                            { label: 'Change DNS', onClick: d => dispatch(ChangeDns({
+                                id: currentTab.id,
+                                action: 'change',
+                                dns1: d.dns1,
+                                dns2: d.dns2
+                            })) },
                             { label: 'Reset DNS', onClick: d => console.log(d) },
                             { label: 'Save DNS', onClick: d => AddDns(d) },
                         ]} 
