@@ -1,0 +1,40 @@
+.sidebar-container {
+    width: 40px;
+    height: calc(100vh - 20px);
+    background-color: #111A;
+    position: fixed;
+
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: calc(100vh - 20px);
+        
+
+        .action {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            color: #777;
+            cursor: pointer;
+            border-left: 2px solid transparent;
+
+            svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            &.selected {
+                color: #FFF;
+                border-left: 2px solid #FFF;
+            }
+
+            &:hover {
+                color: #EEE;
+            }
+        }
+    }
+}

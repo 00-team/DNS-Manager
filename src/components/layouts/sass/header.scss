@@ -1,14 +1,12 @@
 .titlebar-container {
     width: 100vw;
     height: 20px;
-    background-color: #222;
     display: block;
 
     .titlebar {
         width: 100%;
         position: fixed;
-        background-color: #111;
-        // border-bottom: 2px solid #FFF;
+        background-color: #111A;
         height: 20px;
 
         .drag-region {
@@ -23,18 +21,14 @@
 
             .title {
                 font-size: 15px;
-                -webkit-app-region: no-drag;
                 transition: color 200ms;
                 text-transform: uppercase;
-
-                &:hover {
-                    color: #EEE;
-                }
             }
 
             .controls {
                 -webkit-app-region: no-drag;
                 height: 100%;
+                display: flex;
 
                 .btn {
                     display: flex;
@@ -48,6 +42,10 @@
                     svg {
                         width: 18px;
                         height: 18px;
+                    }
+
+                    &:hover {
+                        background-color: #222;
                     }
     
                     &.close {

@@ -1,10 +1,16 @@
 import React from 'react'
 
+// style
 import './sass/button.scss'
 
 const Button = ({ children, onClick }) => {
     return (
-        <button className='custom-button' onClick={() => onClick()} > {children} </button>
+        <button
+            onClick={onClick}
+            className='custom-button'
+        >
+            {children}
+        </button>
     )
 }
 

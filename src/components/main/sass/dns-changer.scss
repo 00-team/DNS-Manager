@@ -1,0 +1,38 @@
+.dns-changer {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    
+    .editor-content {
+        width: 100%;
+        display: flex;
+        height: 100%;
+        
+        .dns-database-side {
+            width: 40%;
+            height: 100%;
+    
+            .dns-list {
+                padding: 10px;
+                height: 100%;
+                overflow-y: auto;
+    
+                .dns {
+                    border: 2px solid #00DC7D;
+                    padding: 10px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    border-radius: 7px;
+                    margin-bottom: 10px;
+                    cursor: pointer;
+                    transition: border-color 500ms linear;
+    
+                    &:hover {
+                        border-color: #1EC9E8;
+                    }
+                }
+            }
+        }
+    }
+}
