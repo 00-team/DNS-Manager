@@ -81,31 +81,42 @@ export const loadTabs = () => (dispatch) => {
 export const ChangeDns = (data) => (dispatch) => {
     Loading(dispatch)
     
-    switch (data.action) {
-        case 'reset':
-            console.log('r');
-        case 'change':
-            if (ChechDns(data.dns1) && ChechDns(data.dns2)) {
-                exec(`powershell Set-DnsClientServerAddress -InterfaceIndex ${data.id} -ServerAddresses ('${data.dns1}','${data.dns2}')`, (error, stdout, stderr) => {
-                    if (error) {
-                        console.log(error, stderr);
-                        let msg = 'Error To Change Dns'
-            
-                        if (stderr.search('PermissionDenied') !== -1) msg = 'You Shoud run app as admin for Reset or Change DNS'
-                        
-                        Loading(dispatch, false)
-                        return SendError(dispatch, msg)
-                    } else {
-                        dispatch({ type: SUCCESS_ALERT, payload: 'Successfully DNS Changed' })
-                    }
-
-                    dispatch(loadTabs())
-                })
-            } else {
+    if (data.action === 'reset') {
+        exec(`powershell Set-DnsClientServerAddress -InterfaceIndex ${data.id} -ResetServerAddresses`, (error, stdout, stderr) => {
+            if (error) {
+                console.log(error, stderr);
+                let msg = 'Error To Reset Dns'
+    
+                if (stderr.search('PermissionDenied') !== -1) msg = 'You Shoud run app as administrator for Reset DNS'
+                
                 Loading(dispatch, false)
-                SendError(dispatch, 'your dns is not valid')
+                return SendError(dispatch, msg)
+            } else {
+                dispatch({ type: SUCCESS_ALERT, payload: 'Successfully DNS Reseted' })
             }
-        default:
-            break;
+
+            dispatch(loadTabs())
+        })
+    } else if (data.action === 'change') {
+        if (ChechDns(data.dns1) && ChechDns(data.dns2)) {
+            exec(`powershell Set-DnsClientServerAddress -InterfaceIndex ${data.id} -ServerAddresses ('${data.dns1}','${data.dns2}')`, (error, stdout, stderr) => {
+                if (error) {
+                    console.log(error, stderr);
+                    let msg = 'Error To Change Dns'
+        
+                    if (stderr.search('PermissionDenied') !== -1) msg = 'You Shoud run app as administrator for Change DNS'
+                    
+                    Loading(dispatch, false)
+                    return SendError(dispatch, msg)
+                } else {
+                    dispatch({ type: SUCCESS_ALERT, payload: 'Successfully DNS Changed' })
+                }
+
+                dispatch(loadTabs())
+            })
+        } else {
+            Loading(dispatch, false)
+            SendError(dispatch, 'Your dns is not valid')
+        }
     }
 }

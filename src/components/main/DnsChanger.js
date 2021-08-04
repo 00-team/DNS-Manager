@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
 
+// axios
+import axios from 'axios'
+
 // redux
 import { useSelector, useDispatch } from 'react-redux'
 import { LOAD_DNS_CHANGER } from '../../redux/reducers/dns-changer/types'
 import { loadTabs, ChangeDns } from '../../redux/actions/dns-changer/dnsChanger'
 import { AddDnsDatabase } from '../../redux/actions/dns-database/dnsDatabase'
 
+// chech dns
+import ChechDns from '../../ChechDns'
 
 // Editor
 import Editor from '../editor/Editor'
@@ -47,7 +52,20 @@ const DnsChanger = () => {
 
 
     const AddDns = (data) => {
-        dispatch(AddDnsDatabase({ dnsName: 'No Name', dns1: data.dns1, dns2: data.dns2 }))
+        if (!data || !data.dns1 || !data.dns2) return alert.error('You should fill dns fields')
+        if (!ChechDns(data.dns1) || !ChechDns(data.dns2)) return alert.error('Your dns is not valid')
+
+        axios.get(`http://ipwhois.app/json/${data.dns1}?objects=isp,success`).then(res => {
+            let dnsName = 'No Name'
+            if (res.data.success) {
+                dnsName = res.data.isp
+            } else {
+                dnsName = 'Offline Dns'
+            }
+
+            dispatch(AddDnsDatabase({ dnsName: dnsName, dns1: data.dns1, dns2: data.dns2 }))
+
+        }).catch(err => alert.error('Error to request the dns'))
     }
 
 
@@ -73,7 +91,10 @@ const DnsChanger = () => {
                                 dns1: d.dns1,
                                 dns2: d.dns2
                             })) },
-                            { label: 'Reset DNS', onClick: d => console.log(d) },
+                            { label: 'Reset DNS', onClick: d => dispatch(ChangeDns({
+                                id: currentTab.id,
+                                action: 'reset',
+                            })) },
                             { label: 'Save DNS', onClick: d => AddDns(d) },
                         ]} 
                     />}
